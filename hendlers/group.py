@@ -70,8 +70,8 @@ async def comment(message: types.Message, state: FSMContext):
         pass
 
 
-@router_group.message(Command('duplicate'))
-async def duplicate_ticket(state: FSMContext):
+@router_group.message(Command(commands="duplicate"))
+async def duplicate_ticket(message: types.Message, state: FSMContext):
     await bot.send_message(GROUP_ID, "Видите тикет")
     await state.set_state(state_.duplicate_by_ticket.duplicate_by_ticket)
 
@@ -85,5 +85,5 @@ async def process_ticket(message: types.Message, state: FSMContext):
     if result:
         pass
     else:
-        await bot.send_message(GROUP_ID, f"Тикет {ticket} не найден или не удалось дублировать.")
+        await bot.send_message(GROUP_ID, f"Тикет `{ticket}` не найден.", parse_mode='Markdown')
     await state.clear()

@@ -54,6 +54,7 @@ async def application(message: types.Message, state: FSMContext):
 
 @router_user.message(state_.application.application)
 async def application_state(message: types.Message, state: FSMContext):
+    await message.answer("Подождите")
     data = await state.get_data()
     topic = data['topic']
     application_message = message.text
